@@ -1,0 +1,7 @@
+[DONE] Integrate configuration changes into buildroot
+[    ] Enable and test RNDIS
+[DONE] Disable kernel logs at startup, shutdown or display black screen at startup
+[DONE] Enable password logins in OpenSSH configuration
+[DONE] Disable and test framebuffer console support (re-enable if does not work properly)
+[    ] Disable initial color test
+[    ] Strip down all configurations in kernel and keep a minimal set
