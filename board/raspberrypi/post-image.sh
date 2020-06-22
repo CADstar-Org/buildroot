@@ -40,6 +40,19 @@ __EOF__
 
 done
 
+echo "Adding LCD support to config.txt (fixes DPI interface)."
+cat << __EOF__ >> "${BINARIES_DIR}/rpi-firmware/config.txt"
+
+# Enables 7 inch display over DPI
+dtoverlay=dpi24
+enable_dpi_lcd=1
+display_default_lcd=1
+dpi_group=2
+dpi_mode=87
+dpi_output_format=0x6f005
+hdmi_cvt 1024 600 60 6 0 0 0
+__EOF__
+
 # Pass an empty rootpath. genimage makes a full copy of the given rootpath to
 # ${GENIMAGE_TMP}/root so passing TARGET_DIR would be a waste of time and disk
 # space. We don't rely on genimage to build the rootfs image, just to insert a
