@@ -36,12 +36,10 @@ __EOF__
 		gpu_mem="${arg:2}"
 		sed -e "/^${gpu_mem%=*}=/s,=.*,=${gpu_mem##*=}," -i "${BINARIES_DIR}/rpi-firmware/config.txt"
 		;;
-	esac
-
-done
-
-echo "Adding LCD support to config.txt (fixes DPI interface)."
-cat << __EOF__ >> "${BINARIES_DIR}/rpi-firmware/config.txt"
+		--add-dpi-lcd-support)
+            if ! grep -qE '^dtoverlay=dpi24' "${BINARIES_DIR}/rpi-firmware/config.txt"; then
+                echo "Adding LCD support to config.txt (fixes DPI interface)."
+                cat << __EOF__ >> "${BINARIES_DIR}/rpi-firmware/config.txt"
 
 # Enables 7 inch display over DPI
 dtoverlay=dpi24
@@ -52,6 +50,26 @@ dpi_mode=87
 dpi_output_format=0x6f005
 hdmi_cvt 1024 600 60 6 0 0 0
 __EOF__
+            fi
+		;;
+		--add-rndis)
+			if ! grep -qE '^dtoverlay=dwc2' "${BINARIES_DIR}/rpi-firmware/config.txt"; then
+				echo "Adding RNDIS"
+				cat << __EOF__ >> "${BINARIES_DIR}/rpi-firmware/config.txt"
+
+# Enables USB Gadget Interface
+dtoverlay=dwc2
+__EOF__
+			fi
+			if ! grep -qE 'modules-load=dwc2,g_ether' "${BINARIES_DIR}/rpi-firmware/cmdline.txt"; then
+				echo "Enable RNDIS at boot time."
+				cat << __EOF__ > "${BINARIES_DIR}/rpi-firmware/cmdline.txt"
+root=/dev/mmcblk0p2 rootwait console=tty1 console=ttyAMA0,115200 modules-load=dwc2,g_ether quiet
+__EOF__
+			fi
+        ;;
+	esac
+done
 
 # Pass an empty rootpath. genimage makes a full copy of the given rootpath to
 # ${GENIMAGE_TMP}/root so passing TARGET_DIR would be a waste of time and disk
