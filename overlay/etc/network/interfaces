@@ -1,16 +1,11 @@
 auto lo
 iface lo inet loopback
 
-auto eth0
-iface eth0 inet dhcp
-  pre-up /etc/network/nfs_check
-  wait-delay 15
-  hostname $(hostname)
-
 allow-hotplug usb0
 iface usb0 inet static
-  address 192.168.7.2
-  netmask 255.255.255.0
-  network 192.168.7.0
-  broadcast 192.168.7.255
-  gateway 192.168.7.1
+    address 192.168.1.2
+    netmask 255.255.255.0
+    network 192.168.1.0
+    broadcast 192.168.1.255
+    gateway 192.168.1.1
+

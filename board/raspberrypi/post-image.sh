@@ -49,6 +49,7 @@ dpi_group=2
 dpi_mode=87
 dpi_output_format=0x6f005
 hdmi_cvt 1024 600 60 6 0 0 0
+
 __EOF__
             fi
 		;;
@@ -58,13 +59,15 @@ __EOF__
 				cat << __EOF__ >> "${BINARIES_DIR}/rpi-firmware/config.txt"
 
 # Enables USB Gadget Interface
-dtoverlay=dwc2
+dtoverlay=dwc2,dr_mode=peripheral
+dtoverlay=g_ether
+
 __EOF__
 			fi
 			if ! grep -qE 'modules-load=dwc2,g_ether' "${BINARIES_DIR}/rpi-firmware/cmdline.txt"; then
 				echo "Enable RNDIS at boot time."
 				cat << __EOF__ > "${BINARIES_DIR}/rpi-firmware/cmdline.txt"
-root=/dev/mmcblk0p2 rootwait console=tty1 console=ttyAMA0,115200 modules-load=dwc2,g_ether quiet
+root=/dev/mmcblk0p2 rootwait console=tty1 console=ttyAMA0,115200
 __EOF__
 			fi
         ;;
