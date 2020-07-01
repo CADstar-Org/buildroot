@@ -24,8 +24,8 @@ HOST_E2FSPROGS_CONF_OPTS = \
 	--disable-defrag \
 	--disable-e2initrd-helper \
 	--disable-fuse2fs \
-	--disable-libblkid \
-	--disable-libuuid \
+	--enable-libblkid \
+	--enable-libuuid \
 	--disable-testio-debug \
 	--enable-symlink-install \
 	--enable-elf-shlibs \
@@ -43,8 +43,8 @@ E2FSPROGS_CONF_OPTS = \
 	$(if $(BR2_PACKAGE_E2FSPROGS_FSCK),--enable-fsck,--disable-fsck) \
 	$(if $(BR2_PACKAGE_E2FSPROGS_RESIZE2FS),--enable-resizer,--disable-resizer) \
 	--disable-uuidd \
-	--disable-libblkid \
-	--disable-libuuid \
+	--enable-libblkid \
+	--enable-libuuid \
 	--disable-e2initrd-helper \
 	--disable-testio-debug \
 	--disable-rpath \
