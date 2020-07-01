@@ -64,10 +64,16 @@ dtoverlay=g_ether
 
 __EOF__
 			fi
-			if ! grep -qE 'modules-load=dwc2,g_ether' "${BINARIES_DIR}/rpi-firmware/cmdline.txt"; then
-				echo "Enable RNDIS at boot time."
-				cat << __EOF__ > "${BINARIES_DIR}/rpi-firmware/cmdline.txt"
-root=/dev/mmcblk0p2 rootwait console=tty1 console=ttyAMA0,115200
+        ;;
+		--add-i2c)
+			if ! grep -qE '^dtoverlay=i2c-dev' "${BINARIES_DIR}/rpi-firmware/config.txt"; then
+				echo "Adding I2C"
+				cat << __EOF__ >> "${BINARIES_DIR}/rpi-firmware/config.txt"
+
+# Enable i2c
+dtoverlay=i2c-dev
+dtoverlay=i2c1-bcm2708,sda1_pin=44,scl1_pin=45,pin_func=6
+
 __EOF__
 			fi
         ;;
