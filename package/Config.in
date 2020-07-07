@@ -2415,4 +2415,9 @@ menu "Text editors and viewers"
 	source "package/vim/Config.in"
 endmenu
 
+menu "CADStar GmbH applications"
+	source "package/cadstar_protocol/Config.in"
+	source "package/cadstar_controller/Config.in"
+endmenu
+
 endmenu

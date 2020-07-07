@@ -1,0 +1,26 @@
+#!/bin/sh
+#
+# Start generator controller
+#
+
+case "$1" in
+  start)
+	printf "Starting generator: "
+	/usr/bin/generator
+	[ $? = 0 ] && echo "OK" || echo "FAIL"
+	;;
+  stop)
+	printf "Stopping network: "
+	killall generator
+	[ $? = 0 ] && echo "OK" || echo "FAIL"
+	;;
+  restart|reload)
+	"$0" stop
+	"$0" start
+	;;
+  *)
+	echo "Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit $?

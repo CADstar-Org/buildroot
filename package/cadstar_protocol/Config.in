@@ -1,0 +1,6 @@
+config BR2_PACKAGE_CADSTAR_PROTOCOL
+	bool "cadstar_protocol"
+	depends on BR2_PACKAGE_QT5BASE
+	depends on BR2_PACKAGE_QT5BASE_GUI
+	help
+	  Projector Protocol Library
