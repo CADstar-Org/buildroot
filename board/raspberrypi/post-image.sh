@@ -42,13 +42,24 @@ __EOF__
                 cat << __EOF__ >> "${BINARIES_DIR}/rpi-firmware/config.txt"
 
 # Enables 7 inch display over DPI
+# dtoverlay=dpi24
+# enable_dpi_lcd=1
+# display_default_lcd=1
+# dpi_group=2
+# dpi_mode=87
+# dpi_output_format=0x6f005
+# hdmi_cvt 1024 600 60 6 0 0 0
+
+# Set up DPI output for CS.Projector
 dtoverlay=dpi24
+framebuffer_width=1280
+framebuffer_height=720
 enable_dpi_lcd=1
 display_default_lcd=1
 dpi_group=2
 dpi_mode=87
-dpi_output_format=0x6f005
-hdmi_cvt 1024 600 60 6 0 0 0
+dpi_output_format=262679
+dpi_timings=1280 0 16 8 16 720 0 45 45 25 0 0 0 60 0 74250000 3
 
 __EOF__
             fi
