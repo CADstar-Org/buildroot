@@ -59,7 +59,7 @@ display_default_lcd=1
 dpi_group=2
 dpi_mode=87
 dpi_output_format=262679
-dpi_timings=1280 0 16 8 16 720 0 45 45 25 0 0 0 60 0 74250000 3
+dpi_timings=1280 0 110 40 220 720 0 5 5 20 0 0 0 60 0 74250000 3
 
 __EOF__
             fi
