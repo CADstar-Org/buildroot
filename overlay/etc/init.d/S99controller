@@ -1,17 +1,17 @@
 #!/bin/sh
 #
-# Start generator controller
+# Start csprojecto_generator controller
 #
 
 case "$1" in
   start)
 	printf "Starting generator: "
-	/usr/bin/generator
+	/usr/bin/csprojector_generator
 	[ $? = 0 ] && echo "OK" || echo "FAIL"
 	;;
   stop)
 	printf "Stopping network: "
-	killall generator
+	killall csprojector_generator
 	[ $? = 0 ] && echo "OK" || echo "FAIL"
 	;;
   restart|reload)
